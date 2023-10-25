@@ -61,9 +61,9 @@ export default function Sidebar() {
         </SidebarButton>
 
         {/* lists of chats */}
-        {chatsSnapshot?.doc.map(chat => (
-          <Chat key=
-        ))}
+        {/* chatsSnapshot?.doc.map(chat => (
+          <Chat key={chat.id} id={chat.id} user={chat.data().users} />
+        )) */}
     </Container>
   )
 }
