@@ -6,26 +6,33 @@ import SearchIcon from "@material-ui/icons/Search"
 import * as EmailValidator from 'email-validator'
 import { auth, db } from "../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
-
+import { useCollection } from "react-firebase-hooks/firestore"
 
 export default function Sidebar() {
 
   const [user] = useAuthState(auth)
+  const useChatRef = db.collection('chats').where('users', 'array-contains', user.email);
+  const [chatsSnapshot] = useCollection(useChatRef)
+
 
   const createChat = () => {
     const input = prompt('Por favor, Digite o endereço de Email do usuario que deseja conversar.');
 
     if (!input) return null;
 
-    if (EmailValidator.validate(input)){
-      // we need to add the chat into DB 'chats' collection
-
+    if (EmailValidator.validate(input) && !chatAlreadyExists(input) && input !== user.email){
+      // we need to add the chat into DB 'chats' collection if it doesnt already exist and is valid
       db.collection('chats').add({
-        users: [user.email],
+        users: [user.email, input],
       }) 
 
     }
+  }
 
+  const chatAlreadyExists = (recipientEmail) => {
+    return !!chatsSnapshot?.docs.find(
+      (chat) => 
+      chat.data().users.find((user) => user == recipientEmail)?.length > 0)
   }
 
   return (
@@ -49,11 +56,14 @@ export default function Sidebar() {
           <SearchIcon />
           <SearchInput placeholder="Pesquise em conversas"/>
         </Search>
-        <SidebarButton>
+        <SidebarButton onClick={createChat}>
           Comece uma nova conversa
         </SidebarButton>
 
         {/* lists of chats */}
+        {chatsSnapshot?.doc.map(chat => (
+          <Chat key=
+        ))}
     </Container>
   )
 }
