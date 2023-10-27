@@ -1,14 +1,39 @@
 import { useRouter } from "next/router";
-import { auth } from "../firebase";
+import { auth, db } from "../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import styled from "styled-components";
 import { Avatar, IconButton } from "@material-ui/core";
 import { AttachFile, MoreVert } from "@material-ui/icons";
+import { useCollection } from "react-firebase-hooks/firestore";
+import Message from "./Message";
 
 function ChatScreen({ chat, messages }) {
   const [user] = useAuthState(auth);
 
   const router = useRouter();
+
+  const [messagesSnapshot] = useCollection(
+    db
+      .collection("chats")
+      .doc(router.query.id)
+      .collection("messages")
+      .orderBy("timestamp", "asc")
+  );
+
+  const showMessages = () => {
+    if (messagesSnapshot) {
+      return messagesSnapshot.docs.map((message) => (
+        <Message
+          key={message.id}
+          user={message.data().user}
+          message={{
+            ...message.data(),
+            timestamp: message.data().timestamp?.toDate().getTime(),
+          }}
+        />
+      ));
+    }
+  };
 
   return (
     <Container>
@@ -28,6 +53,10 @@ function ChatScreen({ chat, messages }) {
           </IconButton>
         </HeaderIcons>
       </Header>
+      <MessageContainer>
+        {showMessages()}
+        <EndOfMessage />
+      </MessageContainer>
     </Container>
   );
 }
@@ -53,5 +82,14 @@ const HeaderInformation = styled.div`
   > h3 {
     margin-bottom: 3px;
   }
+
+  > p {
+    font-size: 14px;
+    color: gray;
+  }
 `;
 const HeaderIcons = styled.div``;
+
+const MessageContainer = styled.div``;
+
+const EndOfMessage = styled.div``;
