@@ -5,6 +5,9 @@ import Loading from '@/components/Loading';
 import { useEffect } from 'react';
 import firebase from 'firebase/compat/app';
 
+import '../styles/globals.css'
+
+
 export default function App({ Component, pageProps }) {
 
   const [user, loading] = useAuthState(auth);
