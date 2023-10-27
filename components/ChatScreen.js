@@ -46,5 +46,12 @@ const Header = styled.div`
   align-items: center;
   border-bottom: 1px solid whitesmoke;
 `;
-const HeaderInformation = styled.div``;
+const HeaderInformation = styled.div`
+  margin-left: 15px;
+  flex: 1;
+
+  > h3 {
+    margin-bottom: 3px;
+  }
+`;
 const HeaderIcons = styled.div``;
