@@ -3,7 +3,7 @@ import { auth, db } from "../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import styled from "styled-components";
 import { Avatar, IconButton } from "@material-ui/core";
-import { AttachFile, MoreVert } from "@material-ui/icons";
+import { AttachFile, InsertEmoticon, MoreVert } from "@material-ui/icons";
 import { useCollection } from "react-firebase-hooks/firestore";
 import Message from "./Message";
 
@@ -57,6 +57,12 @@ function ChatScreen({ chat, messages }) {
         {showMessages()}
         <EndOfMessage />
       </MessageContainer>
+
+    <InputContainer>
+      <InsertEmoticon />
+      <Input />
+    </InputContainer>
+
     </Container>
   );
 }
@@ -93,3 +99,24 @@ const HeaderIcons = styled.div``;
 const MessageContainer = styled.div``;
 
 const EndOfMessage = styled.div``;
+
+const InputContainer = styled.form`
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  position: sticky;
+  bottom: 0;
+  background-color: white;
+  z-index: 100;
+`;	
+
+const Input = styled.input`
+  flex: 1;
+  outline: 0;
+  border: none;
+  border-radius: 10px;
+  background-color: whitesmoke;
+  padding: 20px;
+  margin-left: 15px;
+  margin-right: 15px;
+`;	

@@ -76,7 +76,11 @@ export default function Sidebar() {
   );
 }
 
-const Container = styled.div``;
+const Container = styled.div`
+
+
+
+`;
 
 const Search = styled.div`
   display: flex;

@@ -44,7 +44,6 @@ const Container = styled.div`
     padding: 15px;
     word-break: break-word;
 
-
     &:hover {
         background-color: #e9eaeb;
     }
