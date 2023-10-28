@@ -6,11 +6,43 @@ import { Avatar, IconButton } from "@material-ui/core";
 import { AttachFile, InsertEmoticon, Mic, MoreVert } from "@material-ui/icons";
 import { useCollection } from "react-firebase-hooks/firestore";
 import Message from "./Message";
+import { useState } from "react";
+import firebase from "firebase/compat/app";
+import getRecipientEmail from "utils/getRecipientEmail";
+import TimeAgo from 'timeago-react';
 
 function ChatScreen({ chat, messages }) {
   const [user] = useAuthState(auth);
 
+  const [input, setInput] = useState('');
+
+
+
   const router = useRouter();
+
+
+  const sendMessage = (e) =>{
+    e.preventDefault();
+
+    db.collection("users").doc(user.uid).set({
+      lastSeen: firebase.firestore.FieldValue.serverTimestamp(),
+    }, { merge: true });
+
+
+    db.collection('chats').doc(router.query.id).collection("messages").add({
+      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+      message: input,
+      user: user.email,
+      photoURL: user.photoURL,
+    })
+
+    setInput('');
+
+
+
+  };
+
+
 
   const [messagesSnapshot] = useCollection(
     db
@@ -32,17 +64,50 @@ function ChatScreen({ chat, messages }) {
           }}
         />
       ));
+    } else{
+      return JSON.parse(messages).map(message => (
+        <Message
+          key={message.id}
+          user={message.user}
+          message={message}
+        />
+      ))
     }
   };
+
+  const recipientEmail = getRecipientEmail(chat.users, user)
+
+  const [recipientSnapshot] = useCollection(
+    db.collection('users').where('email', '==', recipientEmail)
+  )
+
+  const recipient = recipientSnapshot?.docs?.[0]?.data();
+
 
   return (
     <Container>
       <Header>
-        <Avatar />
+        {
+          recipient ? (
+            <Avatar src={recipient?.photoURL} />
+          )
+          :
+          (
+            <Avatar>{recipientEmail[0].toUpperCase()}</Avatar>
+          )
+        }
 
         <HeaderInformation>
-          <h3>Email do recipiente</h3>
-          <p>Ultima vez visto...</p>
+          <h3>{recipientEmail}</h3>
+          {recipientSnapshot ? (
+            <p>Última vez visto: {' '}
+            {recipient?.lastSeen?.toDate() ? (
+              <TimeAgo datetime={recipient?.lastSeen.toDate()} />
+            ) : "Indisponivel." }
+             </p>
+          ): (
+            <p>Carregando última vez ativo...</p>
+          )}
         </HeaderInformation>
         <HeaderIcons>
           <IconButton>
@@ -60,7 +125,8 @@ function ChatScreen({ chat, messages }) {
 
     <InputContainer>
       <InsertEmoticon />
-      <Input />
+      <Input value={input} onChange={e => setInput(e.target.value)} />
+      <button hidden disabled={!input} type="submit" onClick={sendMessage}>Send Message</button>
       <Mic />
     </InputContainer>
 

@@ -1,9 +1,15 @@
+import { auth } from "../firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
 import styled from "styled-components";
 
 function Message({ user, message }) {
+  const [userLoggedIn] = useAuthState(auth);
+
+  
+
   return (
     <Container>
-      <p>{message}</p>
+      <p>{message.message}</p>
     </Container>
   );
 }
@@ -11,3 +17,7 @@ function Message({ user, message }) {
 export default Message;
 
 const Container = styled.div``;
+
+const MessageElement = styled.p`
+
+`;
