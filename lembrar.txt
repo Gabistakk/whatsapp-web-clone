@@ -1,0 +1,3 @@
+se tiver cheio de scroll
+
+o id tem o chat container q é tudo q tem a parte direita e ele ta com 98 mas da pra diminuir se tiver com scroll ai o chat da esquerda é no sidebar q tbm ta com 98vh

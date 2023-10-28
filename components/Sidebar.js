@@ -78,7 +78,12 @@ export default function Sidebar() {
 
 const Container = styled.div`
 
+    max-height: 98vh;
+    overflow: scroll;
 
+    &::-webkit-scrollbar{
+        width: 0;
+    }
 
 `;
 

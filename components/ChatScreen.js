@@ -3,7 +3,7 @@ import { auth, db } from "../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import styled from "styled-components";
 import { Avatar, IconButton } from "@material-ui/core";
-import { AttachFile, InsertEmoticon, MoreVert } from "@material-ui/icons";
+import { AttachFile, InsertEmoticon, Mic, MoreVert } from "@material-ui/icons";
 import { useCollection } from "react-firebase-hooks/firestore";
 import Message from "./Message";
 
@@ -61,6 +61,7 @@ function ChatScreen({ chat, messages }) {
     <InputContainer>
       <InsertEmoticon />
       <Input />
+      <Mic />
     </InputContainer>
 
     </Container>
@@ -69,7 +70,8 @@ function ChatScreen({ chat, messages }) {
 
 export default ChatScreen;
 
-const Container = styled.div``;
+const Container = styled.div`
+`;
 const Header = styled.div`
   position: sticky;
   background-color: white;
