@@ -8,6 +8,7 @@ import firebase from "firebase/compat/app";
 import "../styles/globals.css";
 
 export default function App({ Component, pageProps }) {
+  
   const [user, loading] = useAuthState(auth);
 
   useEffect(() => {

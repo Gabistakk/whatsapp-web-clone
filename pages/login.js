@@ -19,14 +19,12 @@ export default function Login() {
             </Head>
 
             <LoginContainer>
-                <h1>Whatsapp Ana Rita</h1>
-                <h2>Clique na logo abaixo!</h2> <h3 style={{ display: 'inline' }}>(login com o Google)</h3>
+                <h1>Whatsapp{'  '}<img src="/whatsapp.svg" style={{ height: '30px', width: '30px', display: 'inline-block', marginBottom: '-5px'}} /> Ana Rita</h1>
+                <h2>Clique abaixo para cadastrar!</h2>
                 <Logo onClick={signIn}
-                    src="http://assets.stickpng.com/images/580b57fcd9996e24bc43c543.png"
+                    src="/google-37.png"
                 />
             </LoginContainer>
-
-
         </Container>
     )
 }
