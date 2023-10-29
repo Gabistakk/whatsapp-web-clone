@@ -6,6 +6,8 @@ import { auth, db } from "../firebase"
 import { useCollection } from "react-firebase-hooks/firestore";
 import { useRouter } from "next/router";
 
+
+
 function Chat({ id, users }) {
 
     const router = useRouter();
@@ -22,6 +24,8 @@ function Chat({ id, users }) {
     const recipient = recipientSnapshot?.docs?.[0]?.data();
 
     const recipientEmail = getRecipientEmail(users, user);
+
+    
 
     return (
     <Container onClick={enterChat}>
