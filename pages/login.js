@@ -10,27 +10,25 @@ export default function Login() {
     }
 
 
-  return (
-    <Container>
-        <Head>
-            <title>
-                Login
-            </title>
-        </Head>
+    return (
+        <Container>
+            <Head>
+                <title>
+                    Login Whatsapp Ana Rita
+                </title>
+            </Head>
 
-        <LoginContainer>
-
-            <Logo
-            src="http://assets.stickpng.com/images/580b57fcd9996e24bc43c543.png"
-            />
-            <Button variant="outlined" onClick={signIn}>
-                Entre com Google
-            </Button>
-        </LoginContainer>
+            <LoginContainer>
+                <h1>Whatsapp Ana Rita</h1>
+                <h2>Clique na logo abaixo!</h2> <h3 style={{ display: 'inline' }}>(login com o Google)</h3>
+                <Logo onClick={signIn}
+                    src="http://assets.stickpng.com/images/580b57fcd9996e24bc43c543.png"
+                />
+            </LoginContainer>
 
 
-    </Container>
-  )
+        </Container>
+    )
 }
 
 
@@ -55,4 +53,5 @@ const Logo = styled.img`
     height: 200px;
     width: 200px;
     margin-bottom: 50px;
+    cursor: pointer;
 `

@@ -4,7 +4,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import styled from "styled-components";
 import { useEffect } from "react";
 import useWindowFocus from "use-window-focus";
-
+import { DoneAll } from "@material-ui/icons";
 
 function Message({ user, message, chat, messageId }) {
   const [userLoggedIn] = useAuthState(auth);
@@ -15,21 +15,18 @@ function Message({ user, message, chat, messageId }) {
 
   const TypeOfTimeStamp = user === userLoggedIn.email ? TimeStampSender : TimeStampReceiver;
 
-  useEffect(() => {
+/*   useEffect(() => {
     if(message?.seen == false && !windowFocused){
       new Audio('/alert1.mp3').play();
-      console.log(message.seen)
     }
-    console.log(message.seen)
     
-}, [])
+}, []) */
 
   useEffect(() => {
     if(user != userLoggedIn.email && message.seen == false && windowFocused == true){
       db.collection("chats").doc(chat.id).collection("messages").doc(messageId).set({
         seen: true,
       }, { merge: true });
-      console.log('viu pelo jeito')
     }
   }, [windowFocused])
 
@@ -38,6 +35,8 @@ function Message({ user, message, chat, messageId }) {
     <Container>
       <TypeOfMessage>{message.message}
       <TypeOfTimeStamp>{message.timestamp ? moment(message.timestamp).tz('America/Sao_Paulo').format('LT') : '...'}</TypeOfTimeStamp>
+      {(user === userLoggedIn.email) && (message.seen == false) && <CheckMark />}
+      {(user === userLoggedIn.email) && (message.seen == true) && <CheckMarkSeen />}
       </TypeOfMessage>
     </Container>
   );
@@ -53,7 +52,7 @@ const MessageElement = styled.p`
   padding-top: 15px;
   border-radius: 8px;
   margin: 10px;
-  min-width: 60px;
+  min-width: 80px;
   padding-bottom: 40px;
   font-size: 20px;
   position: relative;
@@ -78,6 +77,7 @@ const TimeStampSender = styled.span`
   bottom: 0;
   text-align: right;
   right: 0;
+  margin-right: 30px;
 `
 
 const TimeStampReceiver = styled.span`
@@ -88,4 +88,19 @@ const TimeStampReceiver = styled.span`
   bottom: 0;
   text-align: right;
   left: 0;
+`
+
+
+const CheckMark = styled(DoneAll)`
+  color: gray;
+  padding: 18px;
+  font-size: 15px;
+  position: absolute;
+  bottom: 0;
+  text-align: right;
+  right: 0;
+`
+
+const CheckMarkSeen = styled(CheckMark)`
+  color: #4FB6EC;
 `

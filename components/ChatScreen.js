@@ -3,7 +3,7 @@ import { auth, db } from "../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import styled from "styled-components";
 import { Avatar, IconButton } from "@material-ui/core";
-import { AttachFile, InsertEmoticon, Mic, MoreVert } from "@material-ui/icons";
+import { AttachFile, InsertEmoticon, Mic, MoreVert, Send } from "@material-ui/icons";
 import { useCollection } from "react-firebase-hooks/firestore";
 import Message from "./Message";
 import { useEffect, useRef, useState, componentDidMount, componentWillUnmount } from "react";
@@ -53,6 +53,9 @@ function ChatScreen({ chat, messages }) {
 
   const sendMessage = (e) => {
     e.preventDefault();
+    if(input == ''){
+      return;
+    }
 
     db.collection("users").doc(user.uid).set({
       lastSeen: firebase.firestore.FieldValue.serverTimestamp(),
@@ -158,10 +161,15 @@ function ChatScreen({ chat, messages }) {
       </MessageContainer>
 
       <InputContainer>
-        <InsertEmoticon />
+      <IconButton>
+        <InsertEmoticon fontSize="large" />
+      </IconButton>
         <Input value={input} onChange={e => setInput(e.target.value)} />
         <button hidden disabled={!input} type="submit" onClick={sendMessage}>Send Message</button>
-        <Mic />
+        <IconButton onClick={sendMessage} type="submit">
+        <Send fontSize="large"/>
+        </IconButton>
+
       </InputContainer>
 
     </Container>

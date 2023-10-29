@@ -51,7 +51,7 @@ export default function Sidebar() {
         />
         <IconsContainer>
           <IconButton>
-            <ChatIcon />
+            <ChatIcon onClick={createChat} />
           </IconButton>
 
           <IconButton>
