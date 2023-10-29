@@ -1,12 +1,12 @@
 import moment from "moment-timezone";
-import { auth } from "../firebase";
+import { auth, db } from "../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import styled from "styled-components";
 import { useEffect } from "react";
 import useWindowFocus from "use-window-focus";
 
 
-function Message({ user, message }) {
+function Message({ user, message, chat, messageId }) {
   const [userLoggedIn] = useAuthState(auth);
 
   const windowFocused = useWindowFocus();
@@ -20,8 +20,19 @@ function Message({ user, message }) {
       new Audio('/alert1.mp3').play();
       console.log(message.seen)
     }
-    message.seen = true;
+    console.log(message.seen)
+    
 }, [])
+
+  useEffect(() => {
+    if(user != userLoggedIn.email && message.seen == false && windowFocused == true){
+      db.collection("chats").doc(chat.id).collection("messages").doc(messageId).set({
+        seen: true,
+      }, { merge: true });
+      console.log('viu pelo jeito')
+    }
+  }, [windowFocused])
+
 
   return (
     <Container>

@@ -85,6 +85,8 @@ function ChatScreen({ chat, messages }) {
           ...message.data(),
           timestamp: message.data().timestamp?.toDate().getTime(),
           }}
+          chat={chat}
+          messageId={message.id}
           />
           )));
           
@@ -94,6 +96,8 @@ function ChatScreen({ chat, messages }) {
         key={message.id}
         user={message.user}
         message={message}
+        chat={chat}
+        messageId={message.id}
         />
         ))
       }
