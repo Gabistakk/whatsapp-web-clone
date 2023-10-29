@@ -13,9 +13,9 @@ import TimeAgo from 'timeago-react';
 import * as timeago from 'timeago.js'
 import pt_BR from 'timeago.js/lib/lang/pt_BR'
 
-import useSound from "use-sound";
-import useWindowFocus from 'use-window-focus';
 
+import Picker from '@emoji-mart/react'
+import EmojiPicker from "emoji-picker-react";
 
 timeago.register('pt_BR', pt_BR)
 
@@ -26,11 +26,21 @@ function ChatScreen({ chat, messages }) {
 
   const endOfMessagesRef = useRef(null)
 
-
+  const [isPickerVisible, setIsPickerVisible] = useState(false)
 
 
   const router = useRouter();
   
+
+  const handleIsPickerVisible = () =>{
+    if(isPickerVisible){
+      setIsPickerVisible(false)
+      return
+    }
+    setIsPickerVisible(true)
+  }
+
+
   const [messagesSnapshot] = useCollection(
     db
       .collection("chats")
@@ -161,7 +171,10 @@ function ChatScreen({ chat, messages }) {
       </MessageContainer>
 
       <InputContainer>
-      <IconButton>
+      <EmojiScreen>
+      {(isPickerVisible) && <EmojiPicker onEmojiClick={(emoji) => {setInput(input + emoji.emoji)}} />}
+      </EmojiScreen>
+      <IconButton onClick={handleIsPickerVisible}>
         <InsertEmoticon fontSize="large" />
       </IconButton>
         <Input value={input} onChange={e => setInput(e.target.value)} />
@@ -241,3 +254,9 @@ const Input = styled.input`
   margin-left: 15px;
   margin-right: 15px;
 `;	
+
+const EmojiScreen = styled.div`
+  position: absolute;
+  top: -440px;
+  left: 0;
+`
