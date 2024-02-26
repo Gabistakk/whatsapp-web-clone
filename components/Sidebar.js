@@ -45,7 +45,7 @@ export default function Sidebar() {
     <Container>
       <Header>
         <UserAvatar
-          style={{ height: 55, width: 55 }}
+          style={{ height: 60, width: 60 }}
           onClick={() => auth.signOut()}
           src={user.photoURL}
         />

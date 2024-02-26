@@ -73,9 +73,9 @@ function Chat({ id, users }) {
     return (
     <Container onClick={enterChat}>
         {recipient ? (
-            <UserAvatar src={recipient?.photoURL}/>)
+            <UserAvatar src={recipient?.photoURL} style={{ height: 50, width: 50}}/>)
             :
-            (<UserAvatar>{recipientEmail[0].toUpperCase()}</UserAvatar>)
+            (<UserAvatar style={{ height: 50, width: 50}}>{recipientEmail[0].toUpperCase()}</UserAvatar>)
             }
         <p>{recipientEmail}</p>
         {(lastMessage != '') && <Message>{lastMessage}</Message>}
@@ -88,6 +88,9 @@ export default Chat
 
 const Container = styled.div`
     display: flex;
+    font-family: 'Free Sans';
+    font-weight: 400;
+    font-size: 110%;
     align-items: center;
     cursor: pointer;
     padding: 15px;

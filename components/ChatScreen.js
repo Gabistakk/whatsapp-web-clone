@@ -136,11 +136,11 @@ function ChatScreen({ chat, messages }) {
       <Header>
         {
           recipient ? (
-            <Avatar src={recipient?.photoURL} />
+            <Avatar src={recipient?.photoURL} style={{ width: 60, height: 60}}/>
           )
             :
             (
-              <Avatar>{recipientEmail[0].toUpperCase()}</Avatar>
+              <Avatar style={{ width: 60, height: 60}}>{recipientEmail[0].toUpperCase()}</Avatar>
             )
         }
 
@@ -205,13 +205,19 @@ const Header = styled.div`
   height: 80px;
   align-items: center;
   border-bottom: 1px solid whitesmoke;
+  font-family: 'Free Sans';
+  font-weight: 400;
+  font-size: 110%;
 `;
 const HeaderInformation = styled.div`
   margin-left: 15px;
   flex: 1;
 
+
   > h3 {
     margin-bottom: 3px;
+    font-weight: 400;
+    font-size: 130%;
   }
 
   > p {
@@ -242,6 +248,7 @@ const InputContainer = styled.form`
   bottom: 0;
   background-color: white;
   z-index: 100;
+
 `;
 
 const Input = styled.input`
@@ -253,6 +260,9 @@ const Input = styled.input`
   padding: 20px;
   margin-left: 15px;
   margin-right: 15px;
+  font-family: 'Free Sans';
+  font-weight: 400;
+  font-size: 110%;
 `;	
 
 const EmojiScreen = styled.div`

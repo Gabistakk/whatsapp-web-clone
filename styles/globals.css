@@ -4,4 +4,27 @@
 
 * {
     scroll-margin-top: 100px;
+    margin: 0;
+}
+@font-face {
+  font-family: "Free Sans";
+  src: url("/fonts/FreeSans.ttf");
+  src: url("/fonts/FreeSansBold.ttf");
+  src: url("/fonts/FreeSansBoldOblique.ttf");
+  src: url("/fonts/FreeSansOblique.ttf");
+}
+@font-face {
+  font-family: "Free Sans";
+  font-weight: 400;
+  src: url("/fonts/FreeSans.ttf");
+}
+@font-face {
+  font-family: "Free Sans";
+  font-weight: 500;
+  src: url("/fonts/FreeSansBold.ttf");
+}
+@font-face {
+  font-family: "Free Sans";
+  font-weight: 600;
+  src: url("/fonts/FreeSansBoldOblique.ttf");
 }

@@ -3,14 +3,13 @@ import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBSWkqKG_dVL3BzKVYw_hwfMIGrZLMylrs",
-  authDomain: "whatsapp-ana-rita.firebaseapp.com",
-  projectId: "whatsapp-ana-rita",
-  storageBucket: "whatsapp-ana-rita.appspot.com",
-  messagingSenderId: "650704718239",
-  appId: "1:650704718239:web:9e75bccb6b76b3b8b115aa"
+  apiKey: "AIzaSyBP8NlzIcPqxoFYr_IQFZ7vgoccukxwNnI",
+  authDomain: "whatsapp-2-5c778.firebaseapp.com",
+  projectId: "whatsapp-2-5c778",
+  storageBucket: "whatsapp-2-5c778.appspot.com",
+  messagingSenderId: "298403092836",
+  appId: "1:298403092836:web:50a1c92afca9e3a7118271"
 };
-
 
 const app = !firebase.apps.length ? firebase.initializeApp(firebaseConfig) : firebase.app();
 
