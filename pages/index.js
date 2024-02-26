@@ -18,7 +18,7 @@ export default function Home() {
     <NadaContainer>
     <h1>Ninguém por aqui...</h1>
     <img style={{ height: '80%', width: '80%', marginBottom: '-20%', marginTop: '-20%'}} src="https://usagif.com/wp-content/uploads/2022/hqgif/ghost-50-pixel-ghost-transparent-background.gif" />
-    <h1>Clique em uma conversa na barra lateral,</h1><h1>ou comece uma em </h1><h1>"comece uma nova conversa"</h1>
+    <h1>Clique em uma conversa na barra lateral,</h1><h1>ou comece uma em </h1><h1>comece uma nova conversa</h1>
     </NadaContainer>
     </>
   )
