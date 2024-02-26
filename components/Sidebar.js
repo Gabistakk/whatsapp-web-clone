@@ -10,6 +10,8 @@ import { useCollection } from "react-firebase-hooks/firestore";
 import Chat from "./Chat";
 
 export default function Sidebar() {
+
+
   const [user] = useAuthState(auth);
   const userChatRef = db
     .collection("chats")

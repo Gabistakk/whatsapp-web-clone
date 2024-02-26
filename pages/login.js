@@ -2,14 +2,23 @@ import styled from "styled-components"
 import Head from 'next/head';
 import { Button } from "@material-ui/core";
 import { auth, provider } from "../firebase"
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 
 export default function Login() {
 
+    
     const signIn = () => {
         auth.signInWithPopup(provider).catch(alert)
     }
+    
+    const router = useRouter();
 
+    useEffect(() => {
+        router.push('/')
+    }, [])
 
+    
     return (
         <Container>
             <Head>
